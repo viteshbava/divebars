@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dive Bars - Show</title>
+</head>
+<body>
+  <h1><%= divebar.title %></h1>
+  <h2><%= divebar.location %></h2>
+  <p><%= divebar.description %></p>
+  <a href="/divebars/<%= divebar._id %>/edit">Edit</a>
+  <a href="/divebars">Back to All Divebars</a>
+  <form action="/divebars/<%=divebar._id%>?_method=DELETE" method="POST">
+    <button>Delete</button>
+  </form>
+  
+</body>
+</html>
