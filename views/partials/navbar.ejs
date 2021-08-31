@@ -1,0 +1,23 @@
+<nav class="navbar">
+  <a class="navbar_brand" href="/">Divebar Atlas</a>
+  <button class="navbar_toggler" id="hamburger">
+    <span class="navbar_toggler-icon"></span>
+  </button>
+  <ul class="navbar_nav" id="nav-collapse">
+    <li class="nav-item 
+      <% if (typeof nav_active != 'undefined' && nav_active == 'divebars') {  %>
+        active
+      <% } %>
+    ">
+      <a class="nav-link" href="/divebars">Divebars</a>
+    </li>
+    <li class="nav-item
+      <% if (typeof nav_active != 'undefined' && nav_active == 'newDivebar') {  %>
+        active
+      <% } %>
+    ">
+      <a class="nav-link" href="/divebars/new">Add New Divebar</a>
+    </li>
+  </ul>
+</nav>
+
