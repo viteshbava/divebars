@@ -1,11 +1,53 @@
 <% layout('layouts/boilerplate') %> 
-  <h1><%= divebar.title %></h1>
-  <h2><%= divebar.location %></h2>
-  <p><%= divebar.description %></p>
-  <a href="/divebars/<%= divebar._id %>/edit">Edit</a>
-  <a href="/divebars">Back to All Divebars</a>
-  <form action="/divebars/<%=divebar._id%>?_method=DELETE" method="POST">
-    <button>Delete</button>
-  </form>
 
+  <!-- header section -->
+  <section class="show_header">
+    <h1 class="show_header_title"><%= divebar.title %></h1>
+    <a class="show_header_edit btn btn-primary" href="/divebars/<%= divebar._id %>/edit">Edit</a>  
+    <form class="show_header_delete" action="/divebars/<%=divebar._id%>?_method=DELETE" method="POST">
+      <button class="btn btn-danger">Delete</button>
+    </form>
+    <div class="show_header_location barinfo">
+      <i class="fas fa-map-marker-alt"></i>
+      <h3 class="barinfo_label"><%= divebar.location %></h3>
+    </div>
+  </section>
+
+  <!-- Go back link -->
+  <section class="show_gobacklink">
+    <a href="/divebars"><i class="fas fa-arrow-left"></i> Back to All Divebars</a>
+  </section>  
+
+  <!-- Images -->
+  <section class="show_images">
+    <div class="show_images_main"><img src="<%= divebar.image %>" alt="divebar image"></div>
+    <div class="show_images_thumb"><img src="<%= divebar.image %>" alt="divebar image"></div>
+    <div class="show_images_thumb"><img src="<%= divebar.image %>" alt="divebar image"></div>
+    <div class="show_images_thumb"><img src="<%= divebar.image %>" alt="divebar image"></div>
+    <div class="show_images_thumb"><img src="<%= divebar.image %>" alt="divebar image"></div>    
+  </section>
+
+  <!-- Body -->
+  <section class="show_body">
+    <div class="show_body_description">
+      <p><%= divebar.description %></p>
+    </div>
+    <div class="show_body_info">
+      <div class="show_body_info_map">
+        <img src="<%= divebar.map %>" alt="map">
+      </div>
+      <div class="barinfo">
+        <i class="fas fa-map-marker-alt"></i>
+        <h3 class="barinfo_label"><%= divebar.location %></h3>
+      </div>
+      <% if (divebar.capacity) { %> 
+      <div class="barinfo">
+        <i class="fas fa-users"></i>
+        <h3 class="barinfo_label">Capacity:</h3>
+        <p class="barinfo_value"><%= divebar.capacity %></p>
+      </div>
+      <% } %>
+      
+    </div>
+  </section>
 

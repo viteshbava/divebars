@@ -1,10 +1,25 @@
 <% layout('layouts/boilerplate') %> 
-  <h1>All Bars</h1>
 
-  <a href="/divebars/new">Add New Divebar</a>
+  <section class="index_header">
+    <h1>All Bars</h1>
+    <a class="btn btn-primary" href="/divebars/new">Add New Divebar</a>
+  </section>
 
-  <ul>
-    <% for (let divebar of divebars){%>
-      <li><a href="/divebars/<%= divebar._id %>"><%= divebar.title %></a></li>
+  <section class="index_divebarlist">
+    <ul>
+      <% for (let divebar of divebars){%>
+        <li class="index_divebarlist_divebar card">
+          <a href="/divebars/<%= divebar._id %>" class="index_divebarlist_divebar_img">
+            <img src="<%= divebar.image %>" alt="main image">
+          </a>
+          <div class="index_divebarlist_divebar_body">
+            <h2 class="index_divebarlist_divebar_body_title"><a href="/divebars/<%= divebar._id %>"><%= divebar.title %></a></h2>
+            <h3 class="index_divebarlist_divebar_body_location"><%= divebar.location %></h3>
+            <p class="index_divebarlist_divebar_body_descr"><%= divebar.description %></p>
+            <a class="btn btn-primary" href="/divebars/<%= divebar._id %>">View</a> 
+          </div>
+        </li>
       <% }%>
-  </ul>
+    </ul>
+  </section>
+

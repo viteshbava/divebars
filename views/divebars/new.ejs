@@ -1,20 +1,50 @@
 <% layout('layouts/boilerplate') %> 
-  <h1>Create New Bar</h1>
 
-  <form action="/divebars" method="POST">
-    <div>
-        <label for="title">Title</label>
-        <input type="text" id="title" name="divebar[title]">
-    </div>
-    <div>
-        <label for="location">Location</label>
-        <input type="text" id="location" name="divebar[location]">
-    </div>
-    <div>
-        <label for="location">Description</label>
-        <input type="text" id="description" name="divebar[description]">
-    </div>
-    <button>Add Divebar</button>
-  </form>
+  <div class="newedit_container">
+    <!-- Title -->
+    <section class="newedit_header">
+      <h1>Create New Bar</h1>
+    </section>
+    
+    <!-- Form -->
+    <section class="newedit_form">
+      <form action="/divebars" method="POST" novalidate>
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="divebar[title]" required>
+            <div class="feedback feedback-valid">Thank you!</div>
+            <div class="feedback feedback-invalid">Please enter a Title.</div>
+        </div>
+        <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" id="location" name="divebar[location]" required>
+            <div class="feedback feedback-valid">Thank you!</div>
+            <div class="feedback feedback-invalid">Please enter a Location.</div>
+        </div>
+        <div class="form-group">
+            <label for="capacity">Capacity</label>
+            <input type="text" id="capacity" name="divebar[capacity]">
+        </div>
+        <div class="form-group">
+            <label for="location">Description</label>
+            <textarea class="newedit_form_description" type="text" id="description" name="divebar[description]" required></textarea>
+            <div class="feedback feedback-valid">Thank you!</div>
+            <div class="feedback feedback-invalid">Please enter a Description.</div>
+        </div>
+        <div class="form-group">
+            <label for="image">Image</label>
+            <input type="text" id="image" name="divebar[image]" value="https://media.blogto.com/articles/20210305-lipstickanddynamite-02.jpeg?w=2048&cmd=resize_then_crop&height=1365&quality=70">
+        </div>
+        <div class="form-group">
+            <label for="map">Map</label>
+            <input type="text" id="map" name="divebar[map]" value="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F23%2F2020%2F02%2F06%2Fgoogle-maps-update-what-google-maps-can-do.jpg">
+        </div>
+        <button class="newedit_form_addbar btn btn-success">Add Divebar</button>
+      </form>
+    </section>
 
-  <a href="/divebars">Cancel</a>
+    <!-- Cancel -->
+    <section class="newedit_cancel">
+      <a href="/divebars"><i class="fas fa-arrow-left"></i> Cancel, back to All Divebars</a>
+    </section>      
+  </div>
