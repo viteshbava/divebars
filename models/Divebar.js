@@ -1,13 +1,26 @@
 const mongoose = require("mongoose");
+const Review = require("./Review");
 const { Schema } = mongoose;
 
-const DiveBarSchema = new Schema({
+const diveBarSchema = new Schema({
   title: String,
   description: String,
   location: String,
   image: String,
   map: String,
-  capacity: Number,
+  capacity: { type: Number, min: 0 },
+  reviews: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Review",
+    },
+  ],
 });
 
-module.exports = mongoose.model("Divebar", DiveBarSchema);
+diveBarSchema.post("findOneAndDelete", async (deletedDivebar) => {
+  if (deletedDivebar && deletedDivebar.reviews.length) {
+    await Review.deleteMany({ _id: { $in: deletedDivebar.reviews } });
+  }
+});
+
+module.exports = mongoose.model("Divebar", diveBarSchema);

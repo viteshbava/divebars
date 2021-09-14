@@ -12,7 +12,7 @@ body {
   color: #333;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .container {
@@ -22,6 +22,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  flex-grow: 1;
 }
 
 a {
@@ -130,7 +131,6 @@ header {
 /* FOOTER */
 /* ######################################################### */
 footer {
-  margin-top: 2rem;
   padding: 1rem;
   background-color: #333;
   color: #f4f4f4;
@@ -242,6 +242,99 @@ footer {
   margin-bottom: 0.5rem;
 }
 
+.show_tabs {
+  width: 100%;
+}
+
+.show_tabs .tab-headings {
+  display: flex;
+  border-bottom: lightgrey solid 2px;
+}
+
+.show_tabs .tab-headings_btn {
+  padding: 0.5rem 1.5rem;
+}
+
+.show_tabs .tab-headings_btn h3 {
+  color: #585858;
+  font-size: 1.1rem;
+  letter-spacing: 0.05rem;
+}
+
+.show_tabs .tab-headings_btn.is-active {
+  border-bottom: #333 solid 2px;
+  margin-bottom: -2px;
+}
+
+.show_tabs .tab-headings_btn.is-active h3 {
+  color: #333;
+}
+
+.show_tabs .tab-headings_btn:not(.is-active):hover {
+  border-bottom: darkblue solid 2px;
+  margin-bottom: -2px;
+}
+
+.show_tabs .tab-headings_btn:not(.is-active):hover h3 {
+  color: darkblue;
+}
+
+.tab-content {
+  margin: 1rem 0;
+}
+
+.tab-content_item--reviews {
+  width: 60%;
+}
+
+.tab-content_item:not(.is-active) {
+  display: none;
+}
+
+.add-review {
+  margin: 2rem 0;
+}
+
+.add-review_form {
+  margin-top: 1rem;
+  border-bottom: lightgrey solid 2px;
+}
+
+.add-review_submit-btn {
+  margin: 1rem 0;
+}
+
+.review-list {
+  margin-top: 2rem;
+}
+
+.review-list__item {
+  margin: 2rem 0;
+}
+
+.review-list__item:not(:last-child) {
+  border-bottom: lightgrey solid 1px;
+  padding-bottom: 1rem;
+}
+
+.review-list__rating-wrapper {
+  display: inline-block;
+}
+
+.review-list__title {
+  display: inline-block;
+  margin-left: 1rem;
+}
+
+.review-list__author-wrapper {
+  margin: 1rem 0;
+  font-size: 0.8rem;
+}
+
+.review-list__body {
+  margin-bottom: 1rem;
+}
+
 /* ######################################################### */
 /* DIVEBAR NEW/EDIT */
 /* ######################################################### */
@@ -277,6 +370,35 @@ footer {
 .newedit_cancel {
   width: 100%;
   margin-bottom: 1rem;
+}
+
+/* ######################################################### */
+/* ERROR PAGE */
+/* ######################################################### */
+.error_container {
+  margin: auto;
+  min-width: 50%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.error_image {
+  display: flex;
+  justify-content: center;
+}
+
+.error_image i {
+  color: #008cba;
+  font-size: 15rem;
+}
+
+.error_details {
+  text-align: center;
+}
+
+.error_details .btn {
+  margin-top: 1rem;
 }
 
 /* ######################################################### */
@@ -320,6 +442,10 @@ footer {
 
 .btn-thin {
   padding: 0.5rem;
+}
+
+.btn-small {
+  padding: 0.2rem 0.5rem;
 }
 
 .btn-primary {
@@ -411,6 +537,10 @@ h2 {
 .form-group textarea:focus {
   box-shadow: 0px 0px 9px 2px #9fa09f;
   outline: none;
+}
+
+.form-group input[type="range"]:focus {
+  box-shadow: none;
 }
 
 /* ######################################################### */

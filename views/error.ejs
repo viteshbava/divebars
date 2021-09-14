@@ -1,0 +1,16 @@
+<% layout('layouts/boilerplate') %> 
+
+<div class="error_container">
+  <div class="error_image">
+    <i class="fas fa-exclamation-circle"></i>
+  </div>
+  <div class="error_details">
+    <h1>Oops!</h1>  
+    <h2><%= err.statusCode %> </h2>
+    <p><%= err.message %> </p>
+    <a class="btn btn-primary" href="/divebars">Back to Divebars</a>
+  </div>
+</div>
+
+
+

@@ -21,7 +21,7 @@ body {
   color: $primary-dark;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .container {
@@ -31,6 +31,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  flex-grow: 1;
 }
 
 a {
@@ -133,7 +134,6 @@ header {
 /* ######################################################### */
 
 footer {
-  margin-top: 2rem;
   padding: 1rem;
   background-color: $primary-dark;
   color: $primary-light;
@@ -241,6 +241,83 @@ footer {
       margin-bottom: 0.5rem;
     }
   }
+  &_tabs {
+    width: 100%;
+    .tab-headings {
+      display: flex;
+      border-bottom: lightgrey solid 2px;
+      &_btn {
+        padding: 0.5rem 1.5rem;
+        h3 {
+          color: rgb(88, 88, 88);
+          font-size: 1.1rem;
+          letter-spacing: 0.05rem;
+        }
+        &.is-active {
+          h3 {
+            color: $primary-dark;
+          }
+          border-bottom: $primary-dark solid 2px;
+          margin-bottom: -2px;
+        }
+        &:not(.is-active):hover {
+          h3 {
+            color: darkblue;
+          }
+          border-bottom: darkblue solid 2px;
+          margin-bottom: -2px;
+        }
+      }
+    }
+  }
+}
+
+.tab-content {
+  margin: 1rem 0;
+  &_item {
+    &--reviews {
+      width: 60%;
+    }
+  }
+  &_item:not(.is-active) {
+    display: none;
+  }
+}
+
+.add-review {
+  margin: 2rem 0;
+  &_form {
+    margin-top: 1rem;
+    border-bottom: lightgrey solid 2px;
+  }
+  &_submit-btn {
+    margin: 1rem 0;
+  }
+}
+
+.review-list {
+  margin-top: 2rem;
+  &__item {
+    margin: 2rem 0;
+    &:not(:last-child) {
+      border-bottom: lightgrey solid 1px;
+      padding-bottom: 1rem;
+    }
+  }
+  &__rating-wrapper {
+    display: inline-block;
+  }
+  &__title {
+    display: inline-block;
+    margin-left: 1rem;
+  }
+  &__author-wrapper {
+    margin: 1rem 0;
+    font-size: 0.8rem;
+  }
+  &__body {
+    margin-bottom: 1rem;
+  }
 }
 
 /* ######################################################### */
@@ -274,6 +351,34 @@ footer {
   &_cancel {
     width: 100%;
     margin-bottom: 1rem;
+  }
+}
+
+/* ######################################################### */
+/* ERROR PAGE */
+/* ######################################################### */
+
+.error {
+  &_container {
+    margin: auto;
+    min-width: 50%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  &_image {
+    display: flex;
+    justify-content: center;
+    i {
+      color: $primary-blue;
+      font-size: 15rem;
+    }
+  }
+  &_details {
+    text-align: center;
+    .btn {
+      margin-top: 1rem;
+    }
   }
 }
 
@@ -314,6 +419,9 @@ footer {
   }
   &-thin {
     padding: 0.5rem;
+  }
+  &-small {
+    padding: 0.2rem 0.5rem;
   }
   &-primary {
     background-color: $primary-blue;
@@ -397,6 +505,11 @@ h2 {
     &:focus {
       box-shadow: 0px 0px 9px 2px #9fa09f;
       outline: none;
+    }
+  }
+  input[type="range"] {
+    &:focus {
+      box-shadow: none;
     }
   }
 }

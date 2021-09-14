@@ -46,8 +46,86 @@
         <h3 class="barinfo_label">Capacity:</h3>
         <p class="barinfo_value"><%= divebar.capacity %></p>
       </div>
-      <% } %>
-      
+      <% } %>      
     </div>
+  </section>
+
+  <!-- Tabs -->
+  <section class="show_tabs">
+
+    <!-- Tabs - headings -->
+    <div class="tab-headings">
+      <button class="tab-headings_btn is-active" data-tabref="reviews">
+        <h3>Reviews</h3>
+      </button>
+      <button class="tab-headings_btn" data-tabref="events">
+        <h3>Events</h3>
+      </button>
+    </div> 
+
+    <!-- Tabs - content -->
+    <div class="tab-content">
+
+      <!-- Reviews -->
+      <div class="tab-content_item is-active tab-content_item--reviews" id="reviews">
+        <div class="add-review">
+          <h3 class="add-review_headline">Write Your Review</h3>
+
+          <!-- Form -->
+          <form class="add-review_form" action="/divebars/<%= divebar._id %>/reviews" method="POST" novalidate>
+            <div class="form-group">
+                <label for="Rating">Rating</label>
+                <input type="range" id="rating" name="review[rating]" min="1" max="5">
+            </div>
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" id="title" name="review[title]" required>
+                <div class="feedback feedback-valid">Thank you!</div>
+                <div class="feedback feedback-invalid">Please enter a Title.</div>
+            </div>
+            <div class="form-group">
+                <label for="location">Review</label>
+                <textarea type="text" id="description" name="review[body]" required></textarea>
+                <div class="feedback feedback-valid">Thank you!</div>
+                <div class="feedback feedback-invalid">Please enter a Review.</div>
+            </div>
+            <button class="add-review_submit-btn btn btn-primary">Submit Review</button>
+          </form>
+        </div>
+
+         
+
+        <!-- Review List -->
+        <div class="review-list">
+          <% if(divebar.reviews.length == 0) { %> 
+            <div class="review-list_no-review-msg">
+              No reviews yet!
+            </div>
+          <% } else { %>
+            <% for (const r of divebar.reviews) { %>
+                <div class="review-list__item">
+                  <div class="review-list__rating-wrapper">
+                    Rating: <span class="review-list__rating-output"><%= r.rating %></span>
+                  </div>
+                  <h3 class="review-list__title"><%= r.title %></h3>
+                  <div class="review-list__author-wrapper">
+                    Reviewed by <span class="review-list__author">Joe Bloggs</span>
+                  </div>
+                  <div class="review-list__body"><%= r.body %></div>
+                  <form action="/divebars/<%=divebar._id%>/reviews/<%=r._id%>?_method=DELETE" method="POST">
+                    <button class="btn btn-danger btn-small">Delete</button>
+                  </form>                  
+                </div>
+            <% } %>
+          <% } %> 
+
+        </div>
+      </div>
+      <!-- Events -->
+      <div class="tab-content_item" id="events">
+        Events!
+      </div>
+    </div>
+
   </section>
 
