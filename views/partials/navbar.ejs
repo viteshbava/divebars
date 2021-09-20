@@ -1,23 +1,27 @@
 <nav class="navbar">
   <a class="navbar_brand" href="/">Divebar Atlas</a>
-  <button class="navbar_toggler" id="hamburger">
+  <button class="navbar_toggler">
     <span class="navbar_toggler-icon"></span>
   </button>
-  <ul class="navbar_nav" id="nav-collapse">
-    <li class="nav-item 
-      <% if (typeof nav_active != 'undefined' && nav_active == 'divebars') {  %>
-        active
-      <% } %>
-    ">
-      <a class="nav-link" href="/divebars">Divebars</a>
-    </li>
-    <li class="nav-item
-      <% if (typeof nav_active != 'undefined' && nav_active == 'newDivebar') {  %>
-        active
-      <% } %>
-    ">
-      <a class="nav-link" href="/divebars/new">Add New Divebar</a>
-    </li>
-  </ul>
-</nav>
+  <div class="navbar-collapse">
+    <ul class="navbar_nav">
+      <li class="nav-item <% if (typeof nav_active != 'undefined' && nav_active == 'divebars') {  %>
+          active<% } %>">
+        <a class="nav-link" href="/divebars">Divebars</a>
+      </li>
+      <li class="nav-item <% if (typeof nav_active != 'undefined' && nav_active == 'newDivebar') {  %>
+          active<% } %>">
+        <a class="nav-link" href="/divebars/new">Add New Divebar</a>
+      </li>
+    </ul>
+    <ul class="navbar_nav navbar_nav--right">
+      <li class="nav-item nav-item--first-right <% if (typeof nav_active != 'undefined' && nav_active == 'login') {  %>active<% } %>">
+        <a class="nav-link" href="/login">Login</a>
+      </li>
+      <li class="nav-item <% if (typeof nav_active != 'undefined' && nav_active == 'register') {  %>active<% } %>">
+        <a class="nav-link" href="/register">Register</a>
+      </li>
+    </ul>
+  </div>
 
+</nav>

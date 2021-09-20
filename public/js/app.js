@@ -2,8 +2,8 @@
 // Navbar
 // #########################
 
-const hamburger = document.querySelector("#hamburger");
-const nav = document.querySelector("#nav-collapse");
+const hamburger = document.querySelector(".navbar_toggler");
+const nav = document.querySelector(".nav-collapse");
 
 hamburger.addEventListener("click", () => {
   nav.classList.toggle("show");
@@ -40,5 +40,21 @@ for (const tab of show_tabs) {
     for (const c of content_group) c.classList.remove("is-active");
     tab.classList.add("is-active");
     content.classList.add("is-active");
+  });
+}
+
+// #########################
+// ALERTS
+// #########################
+
+const alerts = document.querySelectorAll(".alert-container .alert");
+
+for (const a of alerts) {
+  setTimeout(() => {
+    a.classList.add("alert--fade-out");
+    a.addEventListener("animationend", () => a.remove());
+  }, 5000);
+  a.addEventListener("click", (e) => {
+    if (e.target.closest(".alert__close")) a.remove();
   });
 }

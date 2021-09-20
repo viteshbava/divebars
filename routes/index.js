@@ -1,14 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const ExpressError = require("../utils/ExpressError");
+const index = require("../controllers/index");
 
-router.get("/", (req, res, next) => {
-  res.render("home");
-});
+router.get("/", index.renderHome);
 
 // CATCH ALL
-router.all("*", (req, res, next) => {
-  next(new ExpressError("Page Not Found", 404));
-});
+router.all("*", index.pageNotFound);
 
 module.exports = router;

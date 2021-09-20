@@ -1,0 +1,16 @@
+
+<section class="alert-container">
+  <% if (typeof alerts != 'undefined') { %> 
+    <% for (const alert in alerts){%>
+      <% if (alerts[alert].length) { %>
+        <% for (const a of alerts[alert]) { %> 
+          <div class="alert alert--<%= alert %>" role="alert"><%= a %><button class="alert__close" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button></div>
+        <% } %> 
+      <% } %>         
+    <% }%>
+  <% }%>
+</section>
+
+

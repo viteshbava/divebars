@@ -3,18 +3,26 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 const express = require("express");
+const app = express();
 const path = require("path");
 const morgan = require("morgan");
 const connectDB = require("./config/db");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
+const session = require("express-session");
+const flash = require("connect-flash");
+
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const User = require("./models/User");
 
 const divebarRoutes = require("./routes/divebars");
 const reviewRoutes = require("./routes/reviews");
+const userRoutes = require("./routes/users");
 const indexRoutes = require("./routes");
 
 // Initialize express
-const app = express();
+
 // Morgan for logging to console
 if (process.env.NODE_ENV === "development") app.use(morgan("dev"));
 // EJS
@@ -30,12 +38,44 @@ app.use(express.urlencoded({ extended: true }));
 // method override
 app.use(methodOverride("_method"));
 
+const sessionConfig = {
+  secret: "thisshouldbeabettersecret",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: true,
+    expires: Date.now() + 1000 * 60 * 60 * 24 * 7, // a week from today
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+  },
+};
+app.use(session(sessionConfig));
+
+app.use(flash());
+
+app.use((req, res, next) => {
+  res.locals.alerts = {
+    success: req.flash("success"),
+    info: req.flash("info"),
+    error: req.flash("error"),
+  };
+  next();
+});
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(
+  new LocalStrategy({ usernameField: "email" }, User.authenticate())
+);
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 //############################################################
 // ROUTES
 //############################################################
 
 app.use("/divebars", divebarRoutes);
 app.use("/divebars/:id/reviews", reviewRoutes);
+app.use("/", userRoutes);
 app.use("/", indexRoutes);
 
 //############################################################
