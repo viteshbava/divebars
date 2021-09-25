@@ -9,6 +9,7 @@ const morgan = require("morgan");
 const connectDB = require("./config/db");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
+const ExpressError = require("./utils/ExpressError");
 const session = require("express-session");
 const flash = require("connect-flash");
 
@@ -75,6 +76,10 @@ app.use("/divebars", divebarRoutes);
 app.use("/divebars/:id/reviews", reviewRoutes);
 app.use("/", userRoutes);
 app.use("/", indexRoutes);
+
+app.all("*", (req, res, next) => {
+  next(new ExpressError("Page Not Found", 404));
+});
 
 //############################################################
 // ERROR ROUTE
