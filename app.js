@@ -63,9 +63,7 @@ app.use((req, res, next) => {
 
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(
-  new LocalStrategy({ usernameField: "email" }, User.authenticate())
-);
+passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
@@ -86,6 +84,7 @@ app.use((err, req, res, next) => {
   if (!err.statusCode) err.statusCode = 500;
   if (!err.message) err.message = "Something went wrong!";
   console.error(err);
+  console.log(err.name);
   res.status(err.statusCode).render("error", { err });
 });
 

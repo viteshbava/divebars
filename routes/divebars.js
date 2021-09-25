@@ -1,8 +1,8 @@
 const express = require("express");
-const catchAsync = require("../utils/catchAsync");
 const router = express.Router();
 const { validateDivebar } = require("../middleware");
 const divebars = require("../controllers/divebars");
+const catchAsync = require("../utils/catchAsync");
 
 router
   .route("/")

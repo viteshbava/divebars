@@ -1,6 +1,6 @@
 const ExpressError = require("../utils/ExpressError");
 
-module.exports.renderHome = (req, res, next) => {
+module.exports.renderHome = (req, res) => {
   res.render("home");
 };
 
