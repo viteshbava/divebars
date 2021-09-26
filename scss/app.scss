@@ -165,8 +165,8 @@ footer {
 .alert {
   position: relative;
   text-align: center;
-  min-width: 400px;
-  padding: 0.5rem 0;
+  width: 400px;
+  padding: 0.5rem 1.5rem 0.5rem 1rem;
   margin-bottom: 0.5rem;
   border-radius: 0.3rem;
   border: solid 1px transparent;
@@ -219,7 +219,7 @@ footer {
     opacity: 0;
   }
   to {
-    opacity: 0.8;
+    opacity: 0.9;
   }
 }
 @keyframes alert-fade-out {

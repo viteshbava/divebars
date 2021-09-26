@@ -1,19 +1,21 @@
 const express = require("express");
 const router = express.Router();
-const { isIdValid } = require("../middleware");
-const { validateDivebar } = require("../middleware/divebars");
-const divebars = require("../controllers/divebars");
+const { divebarExists, validateDivebar } = require("../middleware/divebars");
+const divebarsCtr = require("../controllers/divebars");
 
-router.route("/").get(divebars.showAll).post(validateDivebar, divebars.create);
+router
+  .route("/")
+  .get(divebarsCtr.showAll)
+  .post(validateDivebar, divebarsCtr.create);
 
-router.get("/new", divebars.renderCreateForm);
+router.get("/new", divebarsCtr.renderCreateForm);
 
-router.get("/:id/edit", divebars.renderEditForm);
+router.get("/:id/edit", divebarsCtr.renderEditForm);
 
 router
   .route("/:id")
-  .get(isIdValid, divebars.showOne)
-  .put(isIdValid, validateDivebar, divebars.update)
-  .delete(isIdValid, divebars.delete);
+  .get(divebarExists, divebarsCtr.showOne)
+  .put(divebarExists, validateDivebar, divebarsCtr.update)
+  .delete(divebarExists, divebarsCtr.delete);
 
 module.exports = router;
