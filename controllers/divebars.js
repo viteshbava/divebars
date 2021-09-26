@@ -29,22 +29,22 @@ module.exports.renderEditForm = catchAsync(async (req, res) => {
 });
 
 module.exports.showOne = catchAsync(async (req, res) => {
-  const divebar = await Divebar.findById(req.params.id).populate("reviews");
-  res.render("divebars/show", { divebar });
+  await res.locals.divebar.populate("reviews");
+  res.render("divebars/show");
 });
 
 module.exports.update = catchAsync(async (req, res) => {
   const { id } = req.params;
-  const divebar = await Divebar.findByIdAndUpdate(id, {
-    ...req.body.divebar,
-  });
+  Object.assign(res.locals.divebar, req.body.divebar);
+  await res.locals.divebar.save();
   req.flash("success", "Divebar updated successfully!");
-  res.redirect(`/divebars/${divebar._id}`);
+  res.redirect(`/divebars/${id}`);
 });
 
 module.exports.delete = catchAsync(async (req, res) => {
   const { id } = req.params;
-  await Divebar.findByIdAndDelete(id);
+  await res.locals.divebar.delete();
+  // await Divebar.findByIdAndDelete(id);
   req.flash("success", "Divebar deleted successfully!");
   res.redirect("/divebars");
 });
