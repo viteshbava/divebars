@@ -35,16 +35,22 @@ module.exports.showOne = catchAsync(async (req, res) => {
 
 module.exports.update = catchAsync(async (req, res) => {
   const { id } = req.params;
-  Object.assign(res.locals.divebar, req.body.divebar);
-  await res.locals.divebar.save();
+  // await res.locals.divebar.updateOne(req.body.divebar);
+  console.log(req.body.divebar);
+  await Divebar.updateOne({ _id: id }, req.body.divebar);
   req.flash("success", "Divebar updated successfully!");
   res.redirect(`/divebars/${id}`);
 });
 
 module.exports.delete = catchAsync(async (req, res) => {
   const { id } = req.params;
-  await res.locals.divebar.delete();
+  const me = await res.locals.divebar.deleteOne();
+
+  // const me = await Divebar.deleteOne(res.locals.divebar);
+  // await Divebar.deleteOne({ id: res.locals.divebar._id });
   // await Divebar.findByIdAndDelete(id);
+  console.log("What was deleted?:");
+  console.log(me);
   req.flash("success", "Divebar deleted successfully!");
   res.redirect("/divebars");
 });

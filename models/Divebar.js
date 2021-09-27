@@ -17,10 +17,23 @@ const diveBarSchema = new Schema({
   ],
 });
 
+diveBarSchema.pre("save", async () => {
+  console.log("about to save!");
+});
+diveBarSchema.post("save", async () => {
+  console.log("just saved!");
+});
+
+diveBarSchema.pre("findOneAndDelete", async (deletedDivebar) => {
+  console.log("PRE!! lets delete the reviews for that bar if there are any!");
+  console.log(deletedDivebar);
+});
 diveBarSchema.post("findOneAndDelete", async (deletedDivebar) => {
-  if (deletedDivebar && deletedDivebar.reviews.length) {
-    await Review.deleteMany({ _id: { $in: deletedDivebar.reviews } });
-  }
+  console.log("POST lets delete the reviews for that bar if there are any!");
+  console.log(deletedDivebar);
+  // if (deletedDivebar && deletedDivebar.reviews.length) {
+  //   await Review.deleteMany({ _id: { $in: deletedDivebar.reviews } });
+  // }
 });
 
 module.exports = mongoose.model("Divebar", diveBarSchema);
