@@ -1,5 +1,4 @@
 const express = require("express");
-const catchAsync = require("../utils/catchAsync");
 const router = express.Router();
 const users = require("../controllers/users");
 const { authenticate } = require("../middleware/users");
