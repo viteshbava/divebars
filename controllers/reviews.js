@@ -15,8 +15,9 @@ module.exports.create = catchAsync(async (req, res) => {
 
 module.exports.delete = catchAsync(async (req, res) => {
   const { id, reviewId } = req.params;
-  await Divebar.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
-  await Review.findByIdAndDelete(reviewId);
+  const { divebar, review } = res.locals;
+  await divebar.updateOne({ $pull: { reviews: reviewId } });
+  await review.deleteOne();
   req.flash("success", "Review deleted successfully!");
   res.redirect(`/divebars/${id}`);
 });

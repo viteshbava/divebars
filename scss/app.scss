@@ -157,9 +157,9 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: fixed;
+  position: sticky;
   top: 5rem;
-  left: 0;
+  margin-bottom: 1rem;
 }
 
 .alert {
