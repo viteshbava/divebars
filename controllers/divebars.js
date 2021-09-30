@@ -41,13 +41,7 @@ module.exports.update = catchAsync(async (req, res) => {
 });
 
 module.exports.delete = catchAsync(async (req, res) => {
-  const { id } = req.params;
-  // THIS ONE TRIGGERS THE deleteOne() hook, but the deletedDiveBar argument is empty, so I cannot delete the reviews.
-  // await Divebar.deleteOne({ _id: res.locals.divebar._id });
-  // THIS ONE DOES NOT TRIGGER THE deleteOne() hook at all
-  // await res.locals.divebar.deleteOne();
-  // THIS ONE WORKS, except we are finding the divebar all over again when we already have it in res.locals
-  await Divebar.findByIdAndDelete(id);
+  await res.locals.divebar.deleteOne();
   req.flash("success", "Divebar deleted successfully!");
   res.redirect("/divebars");
 });

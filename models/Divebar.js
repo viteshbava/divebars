@@ -17,17 +17,14 @@ const diveBarSchema = new Schema({
   ],
 });
 
-diveBarSchema.post("findOneAndDelete", async (deletedDivebar) => {
-  if (deletedDivebar && deletedDivebar.reviews.length) {
-    await Review.deleteMany({ _id: { $in: deletedDivebar.reviews } });
+diveBarSchema.post(
+  "deleteOne",
+  { document: true, query: false },
+  async (deletedDivebar) => {
+    if (deletedDivebar && deletedDivebar.reviews.length) {
+      await Review.deleteMany({ _id: { $in: deletedDivebar.reviews } });
+    }
   }
-});
-
-// LEAVING THIS HERE FOR WHEN I FIGURE OUT HOW TO TRIGGER IT PROPERLY
-diveBarSchema.post("deleteOne", async (deletedDivebar) => {
-  console.log("POST deleteOne triggered");
-  console.log(deletedDivebar); // FOR SOME REASON THIS IS EMPTY, SO CANNOT BE USED...
-  console.log("Use deletedDiveBar Id to delete reveiws here...");
-});
+);
 
 module.exports = mongoose.model("Divebar", diveBarSchema);
