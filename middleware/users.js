@@ -9,4 +9,11 @@ const authenticate = (req, res, next) => {
   })(req, res, next);
 };
 
-module.exports = { authenticate };
+const isLoggedIn = (req, res, next) => {
+  if (!req.isAuthenticated()) {
+    req.flash("info", "Please login to do that.");
+    return res.redirect("/login");
+  } else next();
+};
+
+module.exports = { authenticate, isLoggedIn };
