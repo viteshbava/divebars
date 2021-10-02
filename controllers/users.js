@@ -6,11 +6,20 @@ module.exports.renderRegisterForm = (req, res) => {
 };
 
 module.exports.register = catchAsync(async (req, res) => {
+  // Could potentially remove catchAsync since we are manually putting in the try/catch, since we want to flash errors comming from User.register.
   const { displayName, email, password } = req.body.user;
   const user = new User({ displayName, email });
-  const newUser = await User.register(user, password);
-  req.flash("success", `Welcome ${displayName}! You are registered!`);
-  res.redirect("/divebars");
+  try {
+    const newUser = await User.register(user, password);
+    req.login(newUser, (err) => {
+      if (err) throw err;
+      req.flash("success", `Welcome ${displayName}! You are registered!`);
+      res.redirect("/divebars");
+    });
+  } catch (e) {
+    req.flash("error", e.message);
+    res.redirect("/register/");
+  }
 });
 
 module.exports.renderLoginForm = (req, res) => {
@@ -19,7 +28,9 @@ module.exports.renderLoginForm = (req, res) => {
 
 module.exports.login = (req, res) => {
   req.flash("success", `Welcome back ${req.user.displayName}!`);
-  res.redirect("/divebars");
+  const redirectUrl = req.session.returnToUrl || "/divebars";
+  delete req.session.returnToUrl;
+  res.redirect(redirectUrl);
 };
 
 module.exports.logout = (req, res) => {

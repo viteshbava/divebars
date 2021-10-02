@@ -11,9 +11,13 @@ const authenticate = (req, res, next) => {
 
 const isLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {
+    req.session.returnToUrl = req.originalUrl; // remember where to come back to
     req.flash("info", "Please login to do that.");
     return res.redirect("/login");
   } else next();
 };
 
-module.exports = { authenticate, isLoggedIn };
+module.exports = {
+  authenticate,
+  isLoggedIn,
+};
