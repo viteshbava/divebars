@@ -53,7 +53,15 @@ app.use(session(sessionConfig));
 
 app.use(flash());
 
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+// global locals variables passed into every response
 app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
   res.locals.alerts = {
     success: req.flash("success"),
     info: req.flash("info"),
@@ -61,12 +69,6 @@ app.use((req, res, next) => {
   };
   next();
 });
-
-app.use(passport.initialize());
-app.use(passport.session());
-passport.use(User.createStrategy());
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
 
 //############################################################
 // ROUTES

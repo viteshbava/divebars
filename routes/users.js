@@ -13,6 +13,6 @@ router
   .get(usersCtr.renderLoginForm)
   .post(authenticate, usersCtr.login);
 
-router.get("/logout", usersCtr.logout);
+router.post("/logout", usersCtr.logout); // use POST for logout to follow best practices.  Will need to ensure logout html element is wrapped in a Form configured to send POST request.
 
 module.exports = router;

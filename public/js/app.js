@@ -3,7 +3,7 @@
 // #########################
 
 const hamburger = document.querySelector(".navbar_toggler");
-const nav = document.querySelector(".nav-collapse");
+const nav = document.querySelector(".navbar-collapse");
 
 hamburger.addEventListener("click", () => {
   nav.classList.toggle("show");

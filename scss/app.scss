@@ -111,16 +111,22 @@ header {
   }
   &-collapse {
     display: flex;
+    align-items: center;
     width: 100%;
+  }
+  &_welcome {
+    opacity: 0.6;
+    font-size: 0.85em;
+    margin-right: 0.5rem;
   }
   &_nav {
     display: flex;
     .nav-item {
       margin: 0 1rem;
+      cursor: pointer;
       .nav-link {
         padding: 3px 0;
         color: lightgrey;
-        display: block;
       }
       &:hover:not(.active) .nav-link {
         opacity: 0.75;
@@ -131,9 +137,9 @@ header {
         }
       }
     }
-    &--right {
-      margin-left: auto;
-    }
+  }
+  &--right {
+    margin-left: auto;
   }
 }
 
@@ -602,6 +608,18 @@ h2 {
   }
 }
 
+// form that wraps around an input of type 'submit' or button to turn it into a link that that sends a POST request
+form {
+  input[type="submit"].submit-post {
+    background-color: transparent;
+    border: none;
+    font-size: inherit;
+    font-family: inherit;
+    letter-spacing: inherit;
+    cursor: pointer;
+  }
+}
+
 /* ######################################################### */
 /* FORM VALIDATION */
 /* ######################################################### */
@@ -657,8 +675,18 @@ form {
   .navbar {
     flex-direction: column;
     align-items: flex-start;
+    &-collapse {
+      flex-direction: column;
+      &:not(.show) {
+        display: none;
+      }
+    }
+    &_welcome {
+      order: -1;
+      margin-bottom: 0.5rem;
+    }
     &_nav {
-      display: none;
+      display: flex;
       margin-top: 0.5rem;
       width: 100%;
       flex-direction: column;
@@ -667,12 +695,14 @@ form {
       .nav-item {
         margin: 0.25rem 0;
       }
-      &.show {
-        display: flex;
-      }
     }
     &_toggler {
+      // display the hamburger
       display: flex;
+    }
+    &--right {
+      // undo the effect of navbar--right when collapsed
+      margin: auto;
     }
   }
 }

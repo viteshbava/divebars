@@ -108,7 +108,14 @@ header {
 
 .navbar-collapse {
   display: flex;
+  align-items: center;
   width: 100%;
+}
+
+.navbar_welcome {
+  opacity: 0.6;
+  font-size: 0.85em;
+  margin-right: 0.5rem;
 }
 
 .navbar_nav {
@@ -117,12 +124,12 @@ header {
 
 .navbar_nav .nav-item {
   margin: 0 1rem;
+  cursor: pointer;
 }
 
 .navbar_nav .nav-item .nav-link {
   padding: 3px 0;
   color: lightgrey;
-  display: block;
 }
 
 .navbar_nav .nav-item:hover:not(.active) .nav-link {
@@ -133,7 +140,7 @@ header {
   color: lightyellow;
 }
 
-.navbar_nav--right {
+.navbar--right {
   margin-left: auto;
 }
 
@@ -637,6 +644,15 @@ h2 {
   box-shadow: none;
 }
 
+form input[type="submit"].submit-post {
+  background-color: transparent;
+  border: none;
+  font-size: inherit;
+  font-family: inherit;
+  letter-spacing: inherit;
+  cursor: pointer;
+}
+
 /* ######################################################### */
 /* FORM VALIDATION */
 /* ######################################################### */
@@ -693,8 +709,18 @@ form .feedback-invalid {
     flex-direction: column;
     align-items: flex-start;
   }
-  .navbar_nav {
+  .navbar-collapse {
+    flex-direction: column;
+  }
+  .navbar-collapse:not(.show) {
     display: none;
+  }
+  .navbar_welcome {
+    order: -1;
+    margin-bottom: 0.5rem;
+  }
+  .navbar_nav {
+    display: flex;
     margin-top: 0.5rem;
     width: 100%;
     flex-direction: column;
@@ -704,10 +730,10 @@ form .feedback-invalid {
   .navbar_nav .nav-item {
     margin: 0.25rem 0;
   }
-  .navbar_nav.show {
-    display: flex;
-  }
   .navbar_toggler {
     display: flex;
+  }
+  .navbar--right {
+    margin: auto;
   }
 }
