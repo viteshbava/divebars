@@ -2,7 +2,7 @@ const Divebar = require("../models/Divebar");
 const catchAsync = require("../utils/catchAsync");
 
 module.exports.showAll = catchAsync(async (req, res) => {
-  const divebars = await Divebar.find({});
+  const divebars = await Divebar.find({}).populate("author");
   // if the description is greater than 200 characters, shorten it before sending back to the index page for display
   for (const d of divebars) {
     if (d.description.length > 200) {
@@ -18,6 +18,7 @@ module.exports.renderCreateForm = (req, res) => {
 
 module.exports.create = catchAsync(async (req, res) => {
   const divebar = new Divebar(req.body.divebar);
+  divebar.author = req.user._id;
   await divebar.save();
   req.flash("success", "Divebar created successfully!");
   res.redirect(`/divebars/${divebar._id}`);
@@ -29,7 +30,13 @@ module.exports.renderEditForm = catchAsync(async (req, res) => {
 });
 
 module.exports.showOne = catchAsync(async (req, res) => {
-  await res.locals.divebar.populate("reviews");
+  await res.locals.divebar.populate([
+    {
+      path: "reviews",
+      populate: { path: "author", select: "displayName" },
+    },
+    "author",
+  ]);
   res.render("divebars/show");
 });
 

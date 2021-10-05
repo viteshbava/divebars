@@ -4,10 +4,13 @@ const catchAsync = require("../utils/catchAsync");
 
 module.exports.create = catchAsync(async (req, res) => {
   const { id } = req.params;
-  const divebar = await Divebar.findById(id);
+  // create review
   const review = new Review(req.body.review);
-  divebar.reviews.push(review);
+  review.author = req.user._id;
   await review.save();
+  // update corresponding divebar
+  const divebar = await Divebar.findById(id);
+  divebar.reviews.push(review);
   await divebar.save();
   req.flash("success", "Review created successfully!");
   res.redirect(`/divebars/${id}`);

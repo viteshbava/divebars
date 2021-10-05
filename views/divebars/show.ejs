@@ -3,10 +3,12 @@
   <!-- header section -->
   <section class="show_header">
     <h1 class="show_header_title"><%= divebar.title %></h1>
-    <a class="show_header_edit btn btn-primary" href="/divebars/<%= divebar._id %>/edit">Edit</a>  
-    <form class="show_header_delete" action="/divebars/<%=divebar._id%>?_method=DELETE" method="POST">
-      <button class="btn btn-danger">Delete</button>
-    </form>
+    <%  if(currentUser && divebar.author.equals(currentUser._id)) { %> 
+      <a class="show_header_edit btn btn-primary" href="/divebars/<%= divebar._id %>/edit">Edit</a>  
+      <form class="show_header_delete" action="/divebars/<%=divebar._id%>?_method=DELETE" method="POST">
+        <button class="btn btn-danger">Delete</button>
+      </form>
+    <% } %> 
     <div class="show_header_location barinfo">
       <i class="fas fa-map-marker-alt"></i>
       <h3 class="barinfo_label"><%= divebar.location %></h3>
@@ -47,6 +49,9 @@
         <p class="barinfo_value"><%= divebar.capacity %></p>
       </div>
       <% } %>      
+      <div class="barinfo">
+        <div class="user-badge">Created by <%= divebar.author.displayName %></p>
+      </div>
     </div>
   </section>
 
@@ -102,19 +107,21 @@
               No reviews yet!
             </div>
           <% } else { %>
-            <% for (const r of divebar.reviews) { %>
+            <% for (const r of divebar.reviews.reverse()) { %>
                 <div class="review-list__item">
                   <div class="review-list__rating-wrapper">
                     Rating: <span class="review-list__rating-output"><%= r.rating %></span>
                   </div>
                   <h3 class="review-list__title"><%= r.title %></h3>
                   <div class="review-list__author-wrapper">
-                    Reviewed by <span class="review-list__author">Joe Bloggs</span>
+                    Review submitted by <span class="review-list__author"><%= r.author.displayName %></span>
                   </div>
                   <div class="review-list__body"><%= r.body %></div>
+                  <%  if(currentUser && r.author._id.equals(currentUser._id)) { %>
                   <form action="/divebars/<%=divebar._id%>/reviews/<%=r._id%>?_method=DELETE" method="POST">
                     <button class="btn btn-danger btn-small">Delete</button>
-                  </form>                  
+                  </form>
+                  <% } %>                   
                 </div>
             <% } %>
           <% } %> 

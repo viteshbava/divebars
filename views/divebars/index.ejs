@@ -15,6 +15,7 @@
           <div class="index_divebarlist_divebar_body">
             <h2 class="index_divebarlist_divebar_body_title"><a href="/divebars/<%= divebar._id %>"><%= divebar.title %></a></h2>
             <h3 class="index_divebarlist_divebar_body_location"><%= divebar.location %></h3>
+            <div class="user-badge">Created by <%= divebar.author.displayName %> </div>
             <p class="index_divebarlist_divebar_body_descr"><%= divebar.description %></p>
             <a class="btn btn-primary" href="/divebars/<%= divebar._id %>">View</a> 
           </div>

@@ -9,6 +9,10 @@ const diveBarSchema = new Schema({
   image: String,
   map: String,
   capacity: { type: Number, min: 0 },
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
   reviews: [
     {
       type: Schema.Types.ObjectId,
