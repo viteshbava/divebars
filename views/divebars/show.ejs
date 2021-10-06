@@ -117,7 +117,7 @@
                     Review submitted by <span class="review-list__author"><%= r.author.displayName %></span>
                   </div>
                   <div class="review-list__body"><%= r.body %></div>
-                  <%  if(currentUser && r.author._id.equals(currentUser._id)) { %>
+                  <%  if(currentUser && r.author.equals(currentUser._id)) { %>
                   <form action="/divebars/<%=divebar._id%>/reviews/<%=r._id%>?_method=DELETE" method="POST">
                     <button class="btn btn-danger btn-small">Delete</button>
                   </form>
