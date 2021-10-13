@@ -12,6 +12,7 @@ const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError");
 const session = require("express-session");
 const flash = require("connect-flash");
+const mongoSanitize = require("express-mongo-sanitize");
 
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
@@ -58,9 +59,12 @@ app.use(passport.session());
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+app.use(mongoSanitize());
 
 // global locals variables passed into every response
 app.use((req, res, next) => {
+  console.log(req.query);
+  console.log(req.body);
   // if we have a returnToUrl and the current url being directed to is /login, it means we have been redirected here because we were trying to do something we needed to be logged in for.  In this case, keep the returnToUrl as it will be used if login is successful.
   // if we have a returnToUrl but the current url being directed to is NOT /login (i.e. exacty what the folliwng if statement checks for), it means were on the login page after being redirected there, but we didn't log in and instead went somewhere else.  In this case, clear the returnToUrl (so if we then do decide to login afterwards, we don't unexpectedly get taken back to the previous attempted page)
   if (req.session.returnToUrl && req.originalUrl !== "/login")
