@@ -16,22 +16,26 @@ const flash = require("connect-flash");
 const mongoSanitize = require("express-mongo-sanitize");
 const helmet = require("helmet");
 const CSP = require("./config/csp");
-
 const passport = require("passport");
 const User = require("./models/User");
-
+const returnToUrl = require("./middleware/returnToUrl");
+const resLocals = require("./middleware/resLocals");
 const divebarRoutes = require("./routes/divebars");
 const reviewRoutes = require("./routes/reviews");
 const userRoutes = require("./routes/users");
 const indexRoutes = require("./routes");
+const errorRoute = require("./routes/error");
 
-// Morgan for logging to console
-if (process.env.NODE_ENV === "development") app.use(morgan("dev"));
 connectDB();
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
 app.engine("ejs", ejsMate);
 
+//############################################################
+// GLOBAL MIDDLEWARE
+//############################################################
+
+if (process.env.NODE_ENV === "development") app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
@@ -45,23 +49,8 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 app.use(mongoSanitize());
-
-// global locals variables passed into every response
-app.use((req, res, next) => {
-  // if we have a returnToUrl and the current url being directed to is /login, it means we have been redirected here because we were trying to do something we needed to be logged in for.  In this case, keep the returnToUrl as it will be used if login is successful.
-  // if we have a returnToUrl but the current url being directed to is NOT /login (i.e. exacty what the folliwng if statement checks for), it means were on the login page after being redirected there, but we didn't log in and instead went somewhere else.  In this case, clear the returnToUrl (so if we then do decide to login afterwards, we don't unexpectedly get taken back to the previous attempted page)
-  if (req.session.returnToUrl && req.originalUrl !== "/login")
-    delete req.session.returnToUrl;
-  // store the current user
-  res.locals.currentUser = req.user;
-  // store flash alerts
-  res.locals.alerts = {
-    success: req.flash("success"),
-    info: req.flash("info"),
-    error: req.flash("error"),
-  };
-  next();
-});
+app.use(returnToUrl);
+app.use(resLocals);
 
 //############################################################
 // ROUTES
@@ -71,22 +60,10 @@ app.use("/divebars", divebarRoutes);
 app.use("/divebars/:id/reviews", reviewRoutes);
 app.use("/", userRoutes);
 app.use("/", indexRoutes);
-
 app.all("*", (req, res, next) => {
   next(new ExpressError("Page Not Found", 404));
 });
-
-//############################################################
-// ERROR ROUTE
-//############################################################
-
-app.use((err, req, res, next) => {
-  if (!err.statusCode) err.statusCode = 500;
-  if (!err.message) err.message = "Something went wrong!";
-  console.error(err);
-  console.log(err.name);
-  res.status(err.statusCode).render("error", { err });
-});
+app.use(errorRoute);
 
 //############################################################
 // START SERVER AND LISTEN
