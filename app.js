@@ -41,11 +41,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
 const sessionConfig = {
+  name: "dvbrsssn",
   secret: "thisshouldbeabettersecret",
   resave: false,
   saveUninitialized: true,
   cookie: {
     httpOnly: true,
+    // secure: true,
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7, // a week from today
     maxAge: 1000 * 60 * 60 * 24 * 7,
   },
