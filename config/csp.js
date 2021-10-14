@@ -1,8 +1,6 @@
-const express = require("express");
-const app = express();
-const helmet = require("helmet");
+// Content Security Policy used for Helmet
 
-// https://www.udemy.com/course/the-web-developer-bootcamp/learn/lecture/22348128#questions/15299690
+const express = require("express");
 
 // Define the URL lists
 const scriptSrcUrls = [
@@ -33,24 +31,15 @@ const imgSrcUrls = [
 ];
 const fontSrcUrls = [];
 
-// Use Helmet
-const useHelmet = () => {
-  console.log("hello");
-  app.use(helmet());
-  app.use(
-    helmet.contentSecurityPolicy({
-      directives: {
-        defaultSrc: [],
-        connectSrc: ["'self'", ...connectSrcUrls],
-        scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
-        styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
-        workerSrc: ["'self'", "blob:"],
-        objectSrc: [],
-        imgSrc: ["'self'", "blob:", "data:", ...imgSrcUrls],
-        fontSrc: ["'self'", ...fontSrcUrls],
-      },
-    })
-  );
+module.exports = {
+  directives: {
+    defaultSrc: [],
+    connectSrc: ["'self'", ...connectSrcUrls],
+    scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
+    styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+    workerSrc: ["'self'", "blob:"],
+    objectSrc: [],
+    imgSrc: ["'self'", "blob:", "data:", ...imgSrcUrls],
+    fontSrc: ["'self'", ...fontSrcUrls],
+  },
 };
-
-module.exports = useHelmet;

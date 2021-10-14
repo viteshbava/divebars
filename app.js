@@ -11,9 +11,11 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError");
 const session = require("express-session");
+const sessionConfig = require("./config/sessionConfig");
 const flash = require("connect-flash");
 const mongoSanitize = require("express-mongo-sanitize");
-const useHelmet = require("./config/helmet");
+const helmet = require("helmet");
+const CSP = require("./config/csp");
 
 const passport = require("passport");
 const User = require("./models/User");
@@ -23,41 +25,20 @@ const reviewRoutes = require("./routes/reviews");
 const userRoutes = require("./routes/users");
 const indexRoutes = require("./routes");
 
-// Initialize express
-
 // Morgan for logging to console
 if (process.env.NODE_ENV === "development") app.use(morgan("dev"));
-// EJS
+connectDB();
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
 app.engine("ejs", ejsMate);
-// Connect to DB
-connectDB();
-// server static folder
+
 app.use(express.static(path.join(__dirname, "public")));
-// parse body from forms
 app.use(express.urlencoded({ extended: true }));
-// method override
 app.use(methodOverride("_method"));
-
-const sessionConfig = {
-  name: "dvbrsssn",
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: true,
-  cookie: {
-    httpOnly: true,
-    // secure: true,
-    expires: Date.now() + 1000 * 60 * 60 * 24 * 7, // a week from today
-    maxAge: 1000 * 60 * 60 * 24 * 7,
-  },
-};
 app.use(session(sessionConfig));
-
 app.use(flash());
-
-useHelmet();
-
+app.use(helmet());
+app.use(helmet(CSP));
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(User.createStrategy());
