@@ -5,7 +5,6 @@ const ExpressError = require("../utils/ExpressError");
 const ObjectId = require("mongodb").ObjectId;
 
 const divebarExists = catchAsync(async (req, res, next) => {
-  console.log(req.params);
   const { id } = req.params;
   if (!ObjectId.isValid(id)) {
     req.flash("error", `That divebar ID is invalid! (ID: ${id})`);
