@@ -13,9 +13,9 @@ const ExpressError = require("./utils/ExpressError");
 const session = require("express-session");
 const flash = require("connect-flash");
 const mongoSanitize = require("express-mongo-sanitize");
+const useHelmet = require("./config/helmet");
 
 const passport = require("passport");
-const LocalStrategy = require("passport-local");
 const User = require("./models/User");
 
 const divebarRoutes = require("./routes/divebars");
@@ -42,7 +42,7 @@ app.use(methodOverride("_method"));
 
 const sessionConfig = {
   name: "dvbrsssn",
-  secret: "thisshouldbeabettersecret",
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -55,6 +55,8 @@ const sessionConfig = {
 app.use(session(sessionConfig));
 
 app.use(flash());
+
+useHelmet();
 
 app.use(passport.initialize());
 app.use(passport.session());
