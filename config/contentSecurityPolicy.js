@@ -1,8 +1,6 @@
 // Content Security Policy used for Helmet
+//
 
-const express = require("express");
-
-// Define the URL lists
 const scriptSrcUrls = [
   "https://stackpath.bootstrapcdn.com/",
   "https://api.tiles.mapbox.com/",
@@ -26,10 +24,10 @@ const connectSrcUrls = [
   "https://events.mapbox.com/",
 ];
 const imgSrcUrls = [
-  "https://res.cloudinary.com/douqbebwk/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT! https://www.udemy.com/course/the-web-developer-bootcamp/learn/lecture/22348128#questions/13143940  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  "https://res.cloudinary.com/douqbebwk/",
   "https://images.unsplash.com/",
 ];
-const fontSrcUrls = [];
+const fontSrcUrls = ["https://use.fontawesome.com"];
 
 module.exports = {
   directives: {
