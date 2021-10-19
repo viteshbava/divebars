@@ -14,11 +14,13 @@ const extension = (joi) => ({
           allowedTags: [],
           allowedAttributes: {},
         });
-        console.log(value);
         console.log(clean);
-        if (clean !== value)
-          return helpers.error("string.escapeHTML", { value });
         return clean;
+        // console.log(value);
+        // console.log(clean);
+        // if (clean !== value)
+        //   return helpers.error("string.escapeHTML", { value });
+        // return clean;
       },
     },
   },
@@ -33,8 +35,8 @@ const divebarSchema = joi.object({
       capacity: joi.number().integer().required().min(0),
       description: joi.string().required().escapeHTML(),
       location: joi.string().required().escapeHTML(),
-      image: joi.string().optional().allow("").escapeHTML(),
-      map: joi.string().optional().allow("").escapeHTML(),
+      image: joi.string().optional().allow(""),
+      map: joi.string().optional().allow(""),
     })
     .required(),
 });
