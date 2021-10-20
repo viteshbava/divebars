@@ -6,12 +6,16 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const morgan = require("morgan");
-require("./config/db")();
+require("./config/db")(process.env.MONGO_URI);
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError");
 const session = require("express-session");
-const sessionConfig = require("./config/sessionConfig");
+const sessionConfig = require("./config/sessionConfig")({
+  mongoUrl: process.env.MONGO_URI,
+  mongoStoreSecret: process.env.MONGOSTORE_SECRET,
+  expSessionSecret: process.env.SESSION_SECRET,
+});
 const flash = require("connect-flash");
 const mongoSanitize = require("express-mongo-sanitize");
 const helmet = require("helmet");
