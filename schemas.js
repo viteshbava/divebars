@@ -10,17 +10,15 @@ const extension = (joi) => ({
   rules: {
     escapeHTML: {
       validate(value, helpers) {
-        const clean = sanitizeHtml(value, {
+        const filtered = sanitizeHtml(value, {
+          allowedTags: false,
+          allowedAttributes: false,
+        });
+        const clean = sanitizeHtml(filtered, {
           allowedTags: [],
           allowedAttributes: {},
         });
-        console.log(clean);
-        return clean;
-        // console.log(value);
-        // console.log(clean);
-        // if (clean !== value)
-        //   return helpers.error("string.escapeHTML", { value });
-        // return clean;
+        if (clean !== filtered) return helpers.error("string.escapeHTML");
       },
     },
   },
