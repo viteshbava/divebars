@@ -6,7 +6,7 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const morgan = require("morgan");
-const connectDB = require("./config/db");
+require("./config/db")();
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError");
@@ -25,7 +25,6 @@ const userRoutes = require("./routes/users");
 const indexRoutes = require("./routes");
 const errorRoute = require("./routes/error");
 
-connectDB();
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
 app.engine("ejs", ejsMate);
