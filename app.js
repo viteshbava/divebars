@@ -54,7 +54,9 @@ app.use(mongoSanitize());
 app.use(returnToUrl);
 app.use(resLocals);
 app.use((req, res, next) => {
+  console.log("Database_URL", process.env.DATABASE_URL);
   console.log(sessionConfig);
+  next();
 });
 
 //############################################################
