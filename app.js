@@ -15,6 +15,7 @@ const sessionConfig = require("./config/sessionConfig")({
   mongoUrl: process.env.MONGO_URI,
   mongoStoreSecret: process.env.MONGOSTORE_SECRET,
   expSessionSecret: process.env.SESSION_SECRET,
+  secure: process.env.NODE_ENV === "production" ? true : false,
 });
 const flash = require("connect-flash");
 const mongoSanitize = require("express-mongo-sanitize");

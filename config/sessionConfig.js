@@ -1,6 +1,6 @@
 const MongoStore = require("connect-mongo");
 
-module.exports = ({ mongoUrl, mongoStoreSecret, expSessionSecret }) => {
+module.exports = ({ mongoUrl, mongoStoreSecret, expSessionSecret, secure }) => {
   const store = MongoStore.create({
     mongoUrl,
     touchAfter: 24 * 60 * 60,
@@ -19,7 +19,7 @@ module.exports = ({ mongoUrl, mongoStoreSecret, expSessionSecret }) => {
     saveUninitialized: true,
     cookie: {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production" ? true : false,
+      secure,
       expires: Date.now() + 1000 * 60 * 60 * 24 * 7, // a week from today
       maxAge: 1000 * 60 * 60 * 24 * 7,
     },
