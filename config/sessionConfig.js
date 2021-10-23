@@ -19,7 +19,7 @@ module.exports = ({ mongoUrl, mongoStoreSecret, expSessionSecret }) => {
     saveUninitialized: true,
     cookie: {
       httpOnly: true,
-      // secure: true,
+      secure: process.env.NODE_ENV === "production" ? true : false,
       expires: Date.now() + 1000 * 60 * 60 * 24 * 7, // a week from today
       maxAge: 1000 * 60 * 60 * 24 * 7,
     },
