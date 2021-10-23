@@ -16,7 +16,6 @@ const sessionConfig = require("./config/sessionConfig")({
   mongoStoreSecret: process.env.MONGOSTORE_SECRET,
   expSessionSecret: process.env.SESSION_SECRET,
 });
-console.log(sessionConfig);
 const flash = require("connect-flash");
 const mongoSanitize = require("express-mongo-sanitize");
 const helmet = require("helmet");
@@ -54,6 +53,9 @@ passport.deserializeUser(User.deserializeUser());
 app.use(mongoSanitize());
 app.use(returnToUrl);
 app.use(resLocals);
+app.use((req, res, next) => {
+  console.log(sessionConfig);
+});
 
 //############################################################
 // ROUTES
