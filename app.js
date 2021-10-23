@@ -54,10 +54,6 @@ passport.deserializeUser(User.deserializeUser());
 app.use(mongoSanitize());
 app.use(returnToUrl);
 app.use(resLocals);
-app.use((req, res, next) => {
-  console.log(sessionConfig);
-  next();
-});
 
 //############################################################
 // ROUTES
