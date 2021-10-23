@@ -16,6 +16,7 @@ const sessionConfig = require("./config/sessionConfig")({
   mongoStoreSecret: process.env.MONGOSTORE_SECRET,
   expSessionSecret: process.env.SESSION_SECRET,
 });
+console.log(sessionConfig);
 const flash = require("connect-flash");
 const mongoSanitize = require("express-mongo-sanitize");
 const helmet = require("helmet");
