@@ -2,6 +2,8 @@
 // Navbar
 // #########################
 
+// MY CHANGE TO DEV
+
 const hamburger = document.querySelector(".navbar_toggler");
 const nav = document.querySelector(".navbar-collapse");
 
