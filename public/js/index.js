@@ -80,7 +80,7 @@ class ShowPageTabs {
 // export default ShowPageTabs;
 
 // ###########################################################################
-// ALERTS
+// FILE: Alerts.js
 // ###########################################################################
 
 class Alerts {
@@ -105,9 +105,54 @@ class Alerts {
 // export default Alerts;
 
 // ###########################################################################
+// FILE: geoMap.js
+// ###########################################################################
+
+class GeoMap {
+  constructor() {
+    this.mapId = "geoMap";
+    this.map = document.querySelector(`#${this.mapId}`);
+    if (this.map) this.showMap();
+  }
+  showMap() {
+    this.getMapParams();
+    if (this.coordinates.length) {
+      this.createMap();
+      this.createMarker();
+    } else this.noMap();
+  }
+  getMapParams() {
+    // Can put Ajax call here
+    mapboxgl.accessToken = MAPBOX_TOKEN;
+    this.coordinates = coordinates;
+  }
+  createMap() {
+    this.map = new mapboxgl.Map({
+      container: this.mapId,
+      style: "mapbox://styles/mapbox/streets-v11", // stylesheet location
+      center: coordinates, // starting position [lng, lat]
+      zoom: 12, // starting zoom
+    });
+  }
+  createMarker() {
+    this.marker = new mapboxgl.Marker().setLngLat(coordinates).addTo(this.map);
+  }
+  noMap() {
+    const noMap = document.createElement("h4");
+    noMap.innerText = "Map Unavailable!";
+    document.getElementById(this.mapId).append(noMap);
+  }
+}
+
+// export default geoMap
+
+// ###########################################################################
 // ###########################################################################
 
 const navbar = new Navbar();
 const formToValidate = new FormsToValidate();
 const showPageTabs = new ShowPageTabs();
 const alerts = new Alerts();
+const geoMap = new GeoMap();
+
+// MAPBOX SETUP: SEE https://docs.mapbox.com/mapbox-gl-js/guides/install/

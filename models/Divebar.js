@@ -6,8 +6,16 @@ const diveBarSchema = new Schema({
   title: String,
   description: String,
   location: String,
+  geometry: {
+    type: {
+      type: String,
+      enum: ["Point"],
+    },
+    coordinates: {
+      type: [Number],
+    },
+  },
   image: String,
-  map: String,
   capacity: { type: Number, min: 0 },
   author: {
     type: Schema.Types.ObjectId,

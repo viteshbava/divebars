@@ -67,6 +67,7 @@ header {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 1000;
   width: 100%;
   padding: 0.5rem 1rem;
   letter-spacing: 0.05rem;
@@ -318,6 +319,7 @@ footer {
   }
 
   &_body {
+    width: 100%;
     margin: 2rem 0;
     display: grid;
     grid-template-columns: 3fr 2fr;

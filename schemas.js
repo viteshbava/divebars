@@ -34,7 +34,6 @@ const divebarSchema = joi.object({
       description: joi.string().required().escapeHTML(),
       location: joi.string().required().escapeHTML(),
       image: joi.string().optional().allow(""),
-      map: joi.string().optional().allow(""),
     })
     .required(),
 });

@@ -36,7 +36,8 @@
     </div>
     <div class="show_body_info">
       <div class="show_body_info_map">
-        <img src="<%= divebar.map %>" alt="map">
+        <div id='geoMap' style='width: 100%; height: 100%;' class="d-flex align-items-center justify-content-center">
+        </div>
       </div>
       <div class="barinfo">
         <i class="fas fa-map-marker-alt"></i>
@@ -136,3 +137,8 @@
 
   </section>
 
+  <script>
+    const MAPBOX_TOKEN = '<%- process.env.MAPBOX_TOKEN %>';
+    let coordinates = '<%- JSON.stringify(divebar.geometry.coordinates) %>';
+    coordinates = JSON.parse(coordinates); 
+  </script>
