@@ -289,17 +289,17 @@ footer {
   margin: 2rem 0;
   display: grid;
   grid-template-columns: 3fr 2fr;
+  grid-template-rows: 300px auto;
   gap: 2rem;
 }
-.show_body_info_map {
+.show_body_description {
+  grid-area: 1/1/3/2;
+}
+.show_body_map {
   width: 100%;
   height: 100%;
-  margin-bottom: 1rem;
 }
-.show_body_info_map img {
-  width: 100%;
-}
-.show_body .barinfo {
+.show_body_info .barinfo {
   margin-bottom: 0.5rem;
 }
 .show_tabs {
