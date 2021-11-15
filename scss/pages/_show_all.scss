@@ -1,0 +1,39 @@
+@use "../abstracts" as *;
+
+.index {
+  &_header {
+    margin-bottom: 1rem;
+  }
+  &_divebarlist {
+    margin-top: 1rem;
+    &_divebar {
+      display: grid;
+      grid-template-columns: 2fr 3fr;
+      gap: 2rem;
+      &_img {
+        height: 250px;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+      &_body {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        &_title {
+          a:visited {
+            color: inherit;
+          }
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+        &_descr {
+          margin: 1rem 0;
+        }
+      }
+    }
+  }
+}

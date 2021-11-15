@@ -15,16 +15,6 @@ body {
   min-height: 100vh;
 }
 
-.container {
-  width: 75%;
-  max-width: 70rem;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  flex-grow: 1;
-}
-
 a {
   text-decoration: none;
 }
@@ -39,9 +29,16 @@ button {
   cursor: pointer;
 }
 
-/* ######################################################### */
-/* HEADER */
-/* ######################################################### */
+.container {
+  width: 75%;
+  max-width: 70rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-grow: 1;
+}
+
 header {
   margin-bottom: 4rem;
 }
@@ -61,6 +58,11 @@ header {
 }
 .navbar a:visited {
   color: inherit;
+}
+@media (min-width: 767px) {
+  .navbar {
+    background-color: pink;
+  }
 }
 .navbar_brand {
   font-size: 1.5rem;
@@ -129,9 +131,6 @@ header {
   margin-left: auto;
 }
 
-/* ######################################################### */
-/* FOOTER */
-/* ######################################################### */
 footer {
   padding: 1rem;
   background-color: #333;
@@ -139,9 +138,6 @@ footer {
   margin-top: auto;
 }
 
-/* ######################################################### */
-/* ALERTS */
-/* ######################################################### */
 .alert-container {
   width: 100%;
   display: flex;
@@ -214,9 +210,6 @@ footer {
     opacity: 0;
   }
 }
-/* ######################################################### */
-/* DIVEBAR INDEX */
-/* ######################################################### */
 .index_header {
   margin-bottom: 1rem;
 }
@@ -251,9 +244,6 @@ footer {
   margin: 1rem 0;
 }
 
-/* ######################################################### */
-/* DIVEBAR SHOW */
-/* ######################################################### */
 .show_header {
   width: 100%;
   display: flex;
@@ -378,9 +368,6 @@ footer {
   margin-bottom: 1rem;
 }
 
-/* ######################################################### */
-/* DIVEBAR NEW/EDIT */
-/* ######################################################### */
 .newedit_container {
   margin: 0 auto;
   display: flex;
@@ -409,9 +396,6 @@ footer {
   margin-bottom: 1rem;
 }
 
-/* ######################################################### */
-/* ERROR PAGE */
-/* ######################################################### */
 .error_container {
   margin: auto;
   min-width: 50%;

@@ -1,0 +1,77 @@
+@use "../abstracts" as *;
+
+.alert-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: sticky;
+  top: 5rem;
+  margin-bottom: 1rem;
+}
+
+.alert {
+  position: relative;
+  text-align: center;
+  width: 400px;
+  padding: 0.5rem 1.5rem 0.5rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.3rem;
+  border: solid 1px transparent;
+  animation-name: alert-fade-in;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  &--success {
+    color: darken($primary-green, 30%);
+    background-color: lighten($primary-green, 45%);
+    border-color: lighten($primary-green, 20%);
+  }
+  &--info {
+    color: darken($primary-blue, 30%);
+    background-color: lighten($primary-blue, 45%);
+    border-color: lighten($primary-blue, 20%);
+  }
+  &--error {
+    color: darken($primary-red, 30%);
+    background-color: lighten($primary-red, 45%);
+    border-color: lighten($primary-red, 20%);
+  }
+
+  &--fade-out {
+    animation-name: alert-fade-out;
+    animation-duration: 0.5s;
+  }
+  &__close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 0.5rem 1rem;
+    span {
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1;
+      color: #000;
+      opacity: 0.5;
+    }
+    &:hover {
+      span {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+@keyframes alert-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.9;
+  }
+}
+@keyframes alert-fade-out {
+  to {
+    opacity: 0;
+  }
+}

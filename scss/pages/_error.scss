@@ -1,0 +1,25 @@
+@use "../abstracts" as *;
+
+.error {
+  &_container {
+    margin: auto;
+    min-width: 50%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  &_image {
+    display: flex;
+    justify-content: center;
+    i {
+      color: $primary-blue;
+      font-size: 15rem;
+    }
+  }
+  &_details {
+    text-align: center;
+    .btn {
+      margin-top: 1rem;
+    }
+  }
+}

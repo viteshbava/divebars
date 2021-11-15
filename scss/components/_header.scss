@@ -1,0 +1,96 @@
+@use "../abstracts" as *;
+
+header {
+  margin-bottom: 4rem;
+}
+
+.navbar {
+  a:visited {
+    color: inherit;
+  }
+  background-color: $primary-dark;
+  color: $primary-light;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  letter-spacing: 0.05rem;
+  @include atSmallMedium {
+    background-color: pink;
+  }
+  &_brand {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-right: 1rem;
+    white-space: nowrap;
+  }
+  &_toggler {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+    text-align: unset;
+    right: 0;
+    margin-right: 1rem;
+    width: 3rem;
+    height: 2rem;
+    &:hover {
+      opacity: 0.75;
+    }
+    &-icon,
+    &-icon::before,
+    &-icon::after {
+      width: 100%;
+      height: 3px;
+      background-color: lightgrey;
+      position: absolute;
+    }
+    &-icon::before,
+    &-icon::after {
+      content: "";
+    }
+    &-icon::before {
+      top: -0.75rem;
+    }
+    &-icon::after {
+      top: 0.75rem;
+    }
+  }
+  &-collapse {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  &_welcome {
+    opacity: 0.6;
+    font-size: 0.85em;
+    margin-right: 0.5rem;
+  }
+  &_nav {
+    display: flex;
+    .nav-item {
+      margin: 0 1rem;
+      cursor: pointer;
+      .nav-link {
+        padding: 3px 0;
+        color: lightgrey;
+      }
+      &:hover:not(.active) .nav-link {
+        opacity: 0.75;
+      }
+      &.active {
+        .nav-link {
+          color: lightyellow;
+        }
+      }
+    }
+  }
+  &--right {
+    margin-left: auto;
+  }
+}
