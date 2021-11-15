@@ -2,26 +2,26 @@
 
 // Media Queries
 
-@mixin forMobile {
+@mixin forMobileAndBelow {
   @media (max-width: $mobile-max) {
     @content;
   }
 }
 
-@mixin forTablet {
-  @media (min-width: #{$mobile-max + 1px}) and (max-width: $tablet-max) {
+@mixin forTabletAndBelow {
+  @media (max-width: $tablet-max) {
     @content;
   }
 }
 
-@mixin forLaptop {
-  @media (min-width: #{$tablet-max + 1px}) and (max-width: $laptop-max) {
+@mixin forLaptopAndBelow {
+  @media (max-width: $laptop-max) {
     @content;
   }
 }
 
-@mixin forDesktop {
-  @media (min-width: #{$laptop-max + 1px}) and (max-width: $desktop-max) {
+@mixin forDesktopAndBelow {
+  @media (max-width: $desktop-max) {
     @content;
   }
 }

@@ -56,6 +56,13 @@
         margin-bottom: 0.5rem;
       }
     }
+    @include forTabletAndBelow {
+      &_description {
+        grid-area: auto;
+      }
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 300px auto;
+    }
   }
   &_tabs {
     width: 100%;
