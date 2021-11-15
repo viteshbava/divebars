@@ -1,0 +1,32 @@
+@use "../abstracts" as *;
+
+.barinfo {
+  display: flex;
+  align-items: center;
+  & i {
+    color: $primary-blue;
+    margin-right: 0.5rem;
+  }
+  &_label {
+    margin-right: 0.5rem;
+  }
+}
+
+.user-badge {
+  font-size: 0.9rem;
+  background-color: $primary-green;
+  color: white;
+  padding: 1px 4px;
+  border-radius: 5px;
+  z-index: -1;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: 500;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 500;
+}

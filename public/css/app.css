@@ -418,9 +418,6 @@ footer {
   margin-top: 1rem;
 }
 
-/* ######################################################### */
-/* DIVEBAR UTILITIES */
-/* ######################################################### */
 .barinfo {
   display: flex;
   align-items: center;
@@ -433,9 +430,25 @@ footer {
   margin-right: 0.5rem;
 }
 
-/* ######################################################### */
-/* BUTTONS */
-/* ######################################################### */
+.user-badge {
+  font-size: 0.9rem;
+  background-color: #28a745;
+  color: white;
+  padding: 1px 4px;
+  border-radius: 5px;
+  z-index: -1;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: 500;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
 .btn {
   display: inline-block;
   padding: 0.5rem 1rem;
@@ -494,39 +507,11 @@ footer {
   background-color: #333333;
 }
 
-/* ######################################################### */
-/* BADGES */
-/* ######################################################### */
-.user-badge {
-  font-size: 0.9rem;
-  background-color: #28a745;
-  color: white;
-  padding: 1px 4px;
-  border-radius: 5px;
-  z-index: -1;
-}
-
-/* ######################################################### */
-/* CARDS */
-/* ######################################################### */
 .card {
   border: 1px #d1d1d1 solid;
   box-shadow: 0px 4px 4px 0px #d1d1d1;
   padding: 1rem;
   margin: 1rem 0;
-}
-
-/* ######################################################### */
-/* UTILITIES */
-/* ######################################################### */
-h1 {
-  font-size: 3rem;
-  font-weight: 500;
-}
-
-h2 {
-  font-size: 2rem;
-  font-weight: 500;
 }
 
 .form-group label {
@@ -562,9 +547,6 @@ form input[type=submit].submit-post {
   cursor: pointer;
 }
 
-/* ######################################################### */
-/* FORM VALIDATION */
-/* ######################################################### */
 form.validated *[required]:valid {
   border-color: #28a745;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
