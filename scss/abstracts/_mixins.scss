@@ -1,17 +1,27 @@
-@mixin atSmall {
-  @media (min-width: 530px) {
+@use "./variables" as *;
+
+// Media Queries
+
+@mixin forMobile {
+  @media (max-width: $mobile-max) {
     @content;
   }
 }
 
-@mixin atSmallMedium {
-  @media (min-width: 767px) {
+@mixin forTablet {
+  @media (min-width: #{$mobile-max + 1px}) and (max-width: $tablet-max) {
     @content;
   }
 }
 
-@mixin atMedium {
-  @media (min-width: 960px) {
+@mixin forLaptop {
+  @media (min-width: #{$tablet-max + 1px}) and (max-width: $laptop-max) {
+    @content;
+  }
+}
+
+@mixin forDesktop {
+  @media (min-width: #{$laptop-max + 1px}) and (max-width: $desktop-max) {
     @content;
   }
 }

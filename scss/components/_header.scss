@@ -19,9 +19,20 @@ header {
   width: 100%;
   padding: 0.5rem 1rem;
   letter-spacing: 0.05rem;
-  @include atSmallMedium {
+
+  @include forMobile {
     background-color: pink;
   }
+  @include forTablet {
+    background-color: green;
+  }
+  @include forLaptop {
+    background-color: blue;
+  }
+  @include forDesktop {
+    background-color: red;
+  }
+
   &_brand {
     font-size: 1.5rem;
     font-weight: 500;

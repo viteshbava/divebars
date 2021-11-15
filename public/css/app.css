@@ -59,9 +59,24 @@ header {
 .navbar a:visited {
   color: inherit;
 }
-@media (min-width: 767px) {
+@media (max-width: 480px) {
   .navbar {
     background-color: pink;
+  }
+}
+@media (min-width: 481px) and (max-width: 768px) {
+  .navbar {
+    background-color: green;
+  }
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+  .navbar {
+    background-color: blue;
+  }
+}
+@media (min-width: 1025px) and (max-width: 1200px) {
+  .navbar {
+    background-color: red;
   }
 }
 .navbar_brand {
